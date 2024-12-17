@@ -32,5 +32,6 @@
   npm test
 
 
-  ## Questions
+  ## Questions and Links
   If you have any questions, you can find me on [GitHub](https://github.com/celestialchai) or contact me via email at 404chai@gmail.com.
+  [YouTube](https://youtu.be/9PRJMaDhNXM)
