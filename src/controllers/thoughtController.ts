@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { ThoughtModel } from '../models/index.js';
-
+import { ThoughtModel } from '../models/index';
 
 export const getAllThoughts = async (_req: Request, res: Response) => {
   try {
@@ -12,7 +11,6 @@ export const getAllThoughts = async (_req: Request, res: Response) => {
     });
   }
 };
-
 
 export const getThoughtById = async (req: Request, res: Response) => {
   const { thoughtId } = req.params;
@@ -32,7 +30,6 @@ export const getThoughtById = async (req: Request, res: Response) => {
   }
 };
 
-
 export const createThought = async (req: Request, res: Response) => {
   const { thoughtText, username } = req.body;
   try {
@@ -47,7 +44,6 @@ export const createThought = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const updateThought = async (req: Request, res: Response) => {
   const { thoughtId } = req.params;
@@ -69,7 +65,6 @@ export const updateThought = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const deleteThought = async (req: Request, res: Response) => {
   const { thoughtId } = req.params;
@@ -96,10 +91,10 @@ export const addReactionToThought = async (req: Request, res: Response) => {
   const { reactionBody, username } = req.body;
 
   try {
-       const thought = await ThoughtModel.findByIdAndUpdate(
+    const thought = await ThoughtModel.findByIdAndUpdate(
       thoughtId,
       {
-        $push: { reactions: { reactionBody, username } }, // Push the reaction to the reactions array
+        $push: { reactions: { reactionBody, username } },
       },
       { new: true }
     );
@@ -117,7 +112,6 @@ export const addReactionToThought = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const removeReactionFromThought = async (req: Request, res: Response) => {
   const { thoughtId, reactionId } = req.params;

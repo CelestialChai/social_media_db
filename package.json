@@ -2,6 +2,7 @@
   "devDependencies": {
     "@types/mongoose": "^5.11.96",
     "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {
@@ -12,7 +13,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "ts-node src/server.ts",
     "dev": "ts-node-dev src/server.ts"
   }
 }
