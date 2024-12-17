@@ -3,19 +3,17 @@ import dotenv from 'dotenv';
 import connectDB from '../config/connection';
 import User from '../models/Users';
 
-// Load environment variables
+
 dotenv.config();
 
 const seedData = async () => {
   try {
-    // Connect to the database
+
     await connectDB();
 
-    // Clear existing users
     await User.deleteMany({});
     console.log('All existing users deleted.');
 
-    // Seed new users
     const users = [
       {
         username: 'alice',
@@ -60,7 +58,7 @@ if (alice && bob) {
     await bob.save();
     console.log('Friendship established between Alice and Bob.');
 
-    // Close the connection
+
     mongoose.connection.close();
     console.log('Database connection closed.');
   } catch (error) {
@@ -69,5 +67,5 @@ if (alice && bob) {
   }
 };
 
-// Execute the seed function
+
 seedData();

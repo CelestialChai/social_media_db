@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import validator from 'validator';
 
 interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
@@ -21,10 +20,7 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: (value: string) => validator.isEmail(value),
-      message: 'Please enter a valid email address',
-    },
+    match: [/.+@.+\..+/, 'Please enter a valid email address'], // Basic regex for email validation
   },
   thoughts: [
     {
@@ -40,12 +36,10 @@ const userSchema = new Schema<IUser>({
   ],
 });
 
-// Virtual for the number of friends
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
-// Set up the schema to automatically populate virtuals when fetching the document
 userSchema.set('toJSON', { virtuals: true });
 
 const User = mongoose.model<IUser>('User', userSchema);

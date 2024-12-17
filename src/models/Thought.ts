@@ -22,11 +22,6 @@ const reactionSchema = new Schema<IReaction>({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (createdAt: Date) => createdAt.toISOString(),
-  },
 });
 
 // Thought Schema
@@ -35,7 +30,7 @@ interface IThought extends Document {
   createdAt: Date;
   username: string;
   reactions: IReaction[];
-  reactionCount: number; // Virtual field
+  reactionCount: number;
 }
 
 const thoughtSchema = new Schema<IThought>({
@@ -45,24 +40,19 @@ const thoughtSchema = new Schema<IThought>({
     minlength: 1,
     maxlength: 280,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (createdAt: Date) => createdAt.toISOString(),
-  },
-  username: {
+   username: {
     type: String,
     required: true,
   },
   reactions: [reactionSchema],
 });
 
-// Virtual for the number of reactions
+// Virtual
 thoughtSchema.virtual('reactionCount').get(function (this: IThought) {
   return this.reactions.length;
 });
 
-// Set up the schema to automatically populate virtuals when fetching the document
+
 thoughtSchema.set('toJSON', { getters: true, virtuals: true });
 
 const Thought = mongoose.model<IThought>('Thought', thoughtSchema);

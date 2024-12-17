@@ -1,4 +1,4 @@
-import userRoutes from './userRoutes';
-import thoughtRoutes from './thoughtRoute';
+import userRoutes from './api';
+import thoughtRoutes from './api';
 
 export default { userRoutes, thoughtRoutes };
